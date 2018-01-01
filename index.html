@@ -4,21 +4,60 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Document</title>
+            <title>GifTastic</title>
         </head>
         <body>
+            <button data-dog="hound">hound</button>
+            <button data-dog="golden retriever">golden retriever</button>
+            <button data-dog="poodle">poodle</button>
+            <div id="gifs-appear-here">
+            </div>
             
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script type="text/javascript">
 
+            $("button").on("click", function() {
+      
+            var dog = $(this).attr("data-dog");
+
             var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=lUBYytptnh2BVAx1hrIlhkiei6btmsKe&q=&limit=25&offset=0&rating=G&lang=en"
+            
+            var topics = ["hound", "golden retriever", "poodle"];
             
             $.ajax({
             url: queryURL,
              method: 'GET'
-             }).done(function(response) {
+             })
+             
+             .done(function(response) {
+              console.log(queryURL);   
               console.log(response);
+              var results = response.data;
+
+              console.log(response);
+
+              for (var i = 0; i < results.length; i++) {
+                var dogDiv = $("<div>");
+
+            var p = $("<p>").text("Rating: " + results[i].rating);
+
+            var dogImage = $("<img>");
+
+            dogImage.attr("src", results[i].images.fixed_height.url);
+
+            dogDiv.append(p);
+            dogDiv.append(dogImage);
+
+            $("#gifs-appear-here").prepend(dogDiv);
+
+              }
+
+
+
+
              });
+
+            });  
             
             
             </script>    
