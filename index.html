@@ -20,21 +20,23 @@
       
             var dog = $(this).attr("data-dog");
 
-            var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=lUBYytptnh2BVAx1hrIlhkiei6btmsKe&q=&limit=25&offset=0&rating=G&lang=en"
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=uvfOJc7DA2mHG117C4kyF5lRa6eAKJzN&limit=10&offset=0&rating=G&lang=en"
             
             var topics = ["hound", "golden retriever", "poodle"];
             
             $.ajax({
             url: queryURL,
-             method: 'GET'
+             method: "GET"
              })
              
              .done(function(response) {
               console.log(queryURL);   
               console.log(response);
               var results = response.data;
+              console.log("success got data");
 
-              console.log(response);
+
+            
 
               for (var i = 0; i < results.length; i++) {
                 var dogDiv = $("<div>");
