@@ -4,64 +4,75 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>GifTastic</title>
+            <title>GifTastic Dogs </title>
         </head>
         <body>
-            <button data-dog="hound">hound</button>
-            <button data-dog="golden retriever">golden retriever</button>
-            <button data-dog="poodle">poodle</button>
-            <div id="gifs-appear-here">
+            <div class="container">
+                <button data-dog="plott hound">plott hound</button>
+                <button data-dog="golden retriever">golden retriever</button>
+                <button data-dog="pit bull">pit bull</button>
+                <form id="dog-form">
+                    <label for="dog-input">Add your favorite dog!</label>
+                    <input type="text" id="dog-input"><br>
+                    <input id="add-dog" type="submit" value="Add a dog">
+                </form>
+                <div id="gifs-appear-here">
+                </div>
+                
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script type="text/javascript">
+
+                var topics = ["hound", "golden retriever", "poodle"];
+
+                $("button").on("click", function() {
+        
+                var dog = $(this).attr("data-dog");
+
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=uvfOJc7DA2mHG117C4kyF5lRa6eAKJzN&limit=10&offset=0&rating=G&lang=en"
+                
+                
+                
+                $.ajax({
+                url: queryURL,
+                method: "GET"
+                })
+                
+                .done(function(response) {
+                    console.log(queryURL);   
+                    console.log(response);
+                    var results = response.data;
+                    console.log("success got data");
+
+
+                
+
+                    for (var i = 0; i < results.length; i++) {
+                        var dogDiv = $("<div>");
+
+                        var p = $("<p>").text("Rating: " + results[i].rating);
+
+                        var dogImage = $("<img>");
+
+                        dogImage.attr("src", results[i].images.fixed_height.url);
+
+                        dogDiv.append(p);
+                        dogDiv.append(dogImage);
+
+                        $("#gifs-appear-here").prepend(dogDiv);
+
+                    }
+
+
+
+
+                });
+
+                
+
+                });  
+                
+                
+                </script>    
             </div>
-            
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script type="text/javascript">
-
-            $("button").on("click", function() {
-      
-            var dog = $(this).attr("data-dog");
-
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=uvfOJc7DA2mHG117C4kyF5lRa6eAKJzN&limit=10&offset=0&rating=G&lang=en"
-            
-            var topics = ["hound", "golden retriever", "poodle"];
-            
-            $.ajax({
-            url: queryURL,
-             method: "GET"
-             })
-             
-             .done(function(response) {
-              console.log(queryURL);   
-              console.log(response);
-              var results = response.data;
-              console.log("success got data");
-
-
-            
-
-              for (var i = 0; i < results.length; i++) {
-                var dogDiv = $("<div>");
-
-            var p = $("<p>").text("Rating: " + results[i].rating);
-
-            var dogImage = $("<img>");
-
-            dogImage.attr("src", results[i].images.fixed_height.url);
-
-            dogDiv.append(p);
-            dogDiv.append(dogImage);
-
-            $("#gifs-appear-here").prepend(dogDiv);
-
-              }
-
-
-
-
-             });
-
-            });  
-            
-            
-            </script>    
         </body>
         </html>
