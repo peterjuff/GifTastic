@@ -11,20 +11,30 @@
                 <button data-dog="plott hound">plott hound</button>
                 <button data-dog="golden retriever">golden retriever</button>
                 <button data-dog="pit bull">pit bull</button>
+                <div id="newButtonsHere"></div>
                 <form id="dog-form">
                     <label for="dog-input">Add your favorite dog!</label>
                     <input type="text" id="dog-input"><br>
                     <input id="add-dog" type="submit" value="Add a dog">
                 </form>
-                <div id="gifs-appear-here">
-                </div>
+                <div id="gifs-appear-here"></div>
+            
                 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                 <script type="text/javascript">
 
-                var topics = ["hound", "golden retriever", "poodle"];
+
+                var topics = ["plott hound", "golden retriever", "pit bull"];
+
+                function displayDogs() {
+
+
+                
 
                 $("button").on("click", function() {
+
+                
+
         
                 var dog = $(this).attr("data-dog");
 
@@ -41,7 +51,7 @@
                     console.log(queryURL);   
                     console.log(response);
                     var results = response.data;
-                    console.log("success got data");
+                    console.log("got data");
 
 
                 
@@ -62,6 +72,36 @@
 
                     }
 
+                function makeButtons() {
+
+                    $("#newButtonsHere").empty();
+
+                    for(var i = 0; i < topics.length; i++) {
+                        
+                        var a = $("<button>");
+                        a.addClass("dog");
+                        a.attr("data-dog", topics[i]);
+                        a.text(topics[i]);
+                        $("#newButtonsHere").append(a);
+
+
+                    }
+
+                }
+
+                $("#add-dog").on("click", function(event) {
+                 event.preventDefault();
+                 var dog = $("#dog-input").val().trim();
+
+                 topics.push(dog);
+
+                 makeButtons();
+                });
+
+                $(document).on("click", ".dog", displayDogs);
+
+                makeButtons();
+
 
 
 
@@ -69,7 +109,7 @@
 
                 
 
-                });  
+            });  
                 
                 
                 </script>    
