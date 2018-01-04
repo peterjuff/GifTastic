@@ -1,0 +1,26 @@
+body {
+    text-align: center;
+    background-color: rgb(231, 232, 238);
+    color: #1a1616;
+}
+
+#dog-form {
+
+    font-size: 35px;
+    
+}
+
+input {
+
+    border-style: solid;
+  
+}
+
+p {
+    font-size: 20px;
+}
+
+#add-dog {
+
+    font-size: 30px;
+}

@@ -5,14 +5,18 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <title>GifTastic Dogs </title>
+            <link rel="stylesheet" type "text/css" href="assets/style.css">
         </head>
         <body>
             <div class="container">
+
+                <h1>GifTastic Dogs!</h1>
                 
                 <div id="newButtonsHere"></div>
                 <form id="dog-form">
                     <label for="dog-input">Add your favorite dog!</label>
                     <input type="text" id="dog-input"><br>
+                    <p>Then press the button below!</p>
                     <input id="add-dog" type="submit" value="Add a dog">
                 </form>
                 <div id="gifs-appear-here"></div>
@@ -24,10 +28,7 @@
 
                 var topics = ["plott hound", "golden retriever", "pit bull"];
 
-               // function displayDogs() {
-
-
-                
+               
 
                 $(document).on("click", ".dog", function() {
 
