@@ -8,9 +8,7 @@
         </head>
         <body>
             <div class="container">
-                <button data-dog="plott hound">plott hound</button>
-                <button data-dog="golden retriever">golden retriever</button>
-                <button data-dog="pit bull">pit bull</button>
+                
                 <div id="newButtonsHere"></div>
                 <form id="dog-form">
                     <label for="dog-input">Add your favorite dog!</label>
@@ -26,14 +24,14 @@
 
                 var topics = ["plott hound", "golden retriever", "pit bull"];
 
-                function displayDogs() {
+               // function displayDogs() {
 
 
                 
 
-                $("button").on("click", function() {
+                $(document).on("click", ".dog", function() {
 
-                
+                console.log("button clicked");
 
         
                 var dog = $(this).attr("data-dog");
@@ -63,7 +61,15 @@
 
                         var dogImage = $("<img>");
 
-                        dogImage.attr("src", results[i].images.fixed_height.url);
+                        dogImage.attr("src", results[i].images.fixed_height_still.url);
+                        dogImage.attr("data-still", results[i].images.fixed_height_still.url)
+                        dogImage.attr("data-animate", results[i].images.fixed_height.url);
+                        dogImage.addClass("dogPic");
+                        dogImage.attr("data-state", "still")
+
+                        
+
+                
 
                         dogDiv.append(p);
                         dogDiv.append(dogImage);
@@ -71,7 +77,7 @@
                         $("#gifs-appear-here").prepend(dogDiv);
 
                     }
-
+                   })  })
                 function makeButtons() {
 
                     $("#newButtonsHere").empty();
@@ -98,18 +104,34 @@
                  makeButtons();
                 });
 
-                $(document).on("click", ".dog", displayDogs);
+                $(document).on("click", ".dogPic", function(){
+                    console.log("click working");
+                    var state = $(this).attr("data-state");
+
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"))
+                        $(this).attr("data-state", "animate")
+                    }
+
+                    else {
+                        $(this).attr("src", $(this).attr("data-still"))
+                        $(this).attr("data-state", "still")
+                    }
+
+                });
+
+               // $(document).on("click", ".dog", displayDogs);
 
                 makeButtons();
 
 
 
 
-                });
+                
 
                 
 
-            });  
+        
                 
                 
                 </script>    
