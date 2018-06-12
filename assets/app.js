@@ -1,6 +1,36 @@
 $(document).ready(function() {
 
+    //inital array
     var topics = ["plott hound", "golden retriever", "pit bull", "poodle"];
+
+    function makeButtons() {
+        //prevents buttons from being added repeatedly
+        $("#newButtonsHere").empty();
+
+        for (var i = 0; i < topics.length; i++) {
+
+            var a = $("<button>");
+            a.addClass("dog");
+            a.attr("data-dog", topics[i]);
+            a.text(topics[i]);
+            $("#newButtonsHere").append(a);
+        }
+    };
+
+    //event listenter for submit button
+    $("#add-dog").on("click", function(event) {
+        
+        event.preventDefault();
+        var dog = $("#dog-input").val().trim();
+
+        topics.push(dog);
+        
+
+        makeButtons();
+
+    });
+
+    makeButtons();
 
     $(document).on("click", ".dog", function() {
         console.log("hi")
@@ -18,10 +48,9 @@ $(document).ready(function() {
         .done(function(response) {
             var results = response.data;
             console.log(response.data)
-        })
-
+      
         for (var i = 0; i < results.length; i++) {
-            var newDiv = $("<div>");
+            var dogDiv = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
 
             var dogImage = $("<img>");
@@ -36,36 +65,15 @@ $(document).ready(function() {
             dogDiv.append(dogImage);
 
             $("#gifs-appear-here").prepend(dogDiv);
+        
 
-
-        };
-
-    });
-
-    function makeButtons() {
-
-        $("#newButtonsHere").empty();
-
-        for (var j = 0; j < topics.length; j++) {
-
-            var a = $("<button>");
-            a.addClass("dog");
-            a.attr("data-dog", topics[j]);
-            a.text(topics[j]);
-            $("#newButtonsHere").append(a);
-        }
-    };
-
-    $("#add-dog").on("click", ".dogPic", function(event) {
-
-        event.preventDefault();
-        var dog = $("#dog-input").val().trim();
-
-        topics.push(dog);
-
-        makeButtons();
+            };
+        
+        })
 
     });
+
+
 
     $(document).on("click", ".dogPic", function() {
         var state = $(this).attr("data-state");
@@ -81,8 +89,6 @@ $(document).ready(function() {
 
     });
 
-
-    makeButtons();
 
 
 
